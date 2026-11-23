@@ -21,7 +21,7 @@ data out of source systems; Floe decides what is allowed into trusted storage.
   metadata, and reporting in one human-readable YAML contract.
 - Reads common file exports and extracted datasets from local or cloud storage.
 - Applies schema, casting, nullability, and uniqueness checks before write.
-- Writes accepted rows to Parquet or Apache Iceberg (REST catalog), with SCD1 merge on Iceberg.
+- Writes accepted rows to Parquet, Apache Iceberg (REST catalog), or Delta Lake. SCD1 and SCD2 merges are supported on Iceberg only.
 - Writes invalid rows separately and emits deterministic JSON run reports.
 - Runs as a CLI, Docker image, Python library, or orchestrated job.
 
@@ -45,7 +45,7 @@ single node. Unique checks against table history semi-join each chunk with Polar
 against a local cache of the table's key columns.
 
 - **Inputs:** CSV · TSV · JSON · Parquet · ORC · Avro · XLSX · XML
-- **Accepted outputs:** Parquet · Apache Iceberg
+- **Accepted outputs:** Parquet · Apache Iceberg · Delta Lake (local/S3 only)
 - **Storage:** local · S3 (and S3-compatible stores) · ADLS · GCS
 - **Catalogs:** Iceberg REST (Polaris) · AWS Glue
 
@@ -65,7 +65,7 @@ catalog (Delta, ADLS and GCS are back). The Rust implementation that supported t
 | Checks: schema mismatch, cast, `not_null`, `unique` | [docs/concepts/checks.md](docs/concepts/checks.md) |
 | Supported inputs, outputs, storage, and catalogs | [docs/reference/support-matrix.md](docs/reference/support-matrix.md) |
 | Write modes: `overwrite`, `append`, `merge_scd1`, `merge_scd2` | [docs/concepts/write-modes.md](docs/concepts/write-modes.md) |
-| Parquet and Iceberg sinks | [docs/sinks/parquet.md](docs/sinks/parquet.md), [docs/sinks/iceberg.md](docs/sinks/iceberg.md) |
+| Parquet, Iceberg and Delta sinks | [docs/sinks/parquet.md](docs/sinks/parquet.md), [docs/sinks/iceberg.md](docs/sinks/iceberg.md), [docs/sinks/delta.md](docs/sinks/delta.md) |
 | S3 storage | [docs/storages/s3.md](docs/storages/s3.md) |
 | ADLS and GCS storage | [docs/storages/adls.md](docs/storages/adls.md), [docs/storages/gcs.md](docs/storages/gcs.md) |
 | Incremental file state | [docs/concepts/incremental.md](docs/concepts/incremental.md) |
